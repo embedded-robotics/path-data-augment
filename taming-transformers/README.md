@@ -57,3 +57,11 @@ Training on your own dataset can be beneficial to get better tokens and better i
    python main.py --base configs/custom_vqgan.yaml -t True --gpus 0,1
    ```
    Use `--gpus 0,` (with a trailing comma) to train on a single GPU.
+
+8. Make sure to add the following into configs/custom_vqgan.yaml
+
+```bash
+lightning:
+  trainer:
+    strategy: ddp_find_unused_parameters_true
+```

@@ -41,3 +41,6 @@ data:
       params:
         test_images_list_file: data/cifar10_test.txt
         size: 32 #256
+lightning:
+  trainer:
+    strategy: ddp_find_unused_parameters_true
