@@ -65,3 +65,11 @@ lightning:
   trainer:
     strategy: ddp_find_unused_parameters_true
 ```
+
+## Training on PathVQA Dataset
+
+Run training:
+   ```bash
+   python main.py --base configs/path_vqa_vqgan.yaml -t True --gpus 0,1
+   ```
+   Use `--gpus 0,` (with a trailing comma) to train on a single GPU.
