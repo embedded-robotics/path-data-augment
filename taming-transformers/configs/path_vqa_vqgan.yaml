@@ -43,6 +43,8 @@ data:
         size: 256
 
 lightning:
+  trainer:
+    strategy: ddp_find_unused_parameters_true
   callbacks:
     image_logger:
       params:
