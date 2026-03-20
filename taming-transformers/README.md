@@ -68,7 +68,25 @@ lightning:
 
 ## Training on PathVQA Dataset
 
-Run training:
+1. Download the raw PathVQA parquet shards from Hugging Face:
+   ```bash
+   cd path-data-augment/taming-transformers
+
+   python -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='flaviagiammarino/path-vqa', repo_type='dataset', local_dir='../data/path-vqa-hf')"
+   ```
+   This downloads the dataset from:
+   `https://huggingface.co/datasets/flaviagiammarino/path-vqa`
+
+2. Extract the images and generate the split files used by the training config:
+   ```bash
+   python scripts/prepare_path_vqa.py --source-dir ../data/path-vqa-hf/data --images-dir data/path_vqa_images --lists-dir data
+   ```
+   `scripts/prepare_path_vqa.py` extracts unique RGB JPEGs into
+   `data/path_vqa_images/{train,validation,test}` and writes the split lists
+   `data/path_vqa_train.txt`, `data/path_vqa_validation.txt`, and
+   `data/path_vqa_test.txt` used by `configs/path_vqa_vqgan.yaml`.
+
+3. Run training:
    ```bash
    python main.py --base configs/path_vqa_vqgan.yaml -t True --gpus 0,1
    ```
